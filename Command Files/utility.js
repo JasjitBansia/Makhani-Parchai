@@ -13,79 +13,62 @@ module.exports = {
       let PingedUser =
         message.mentions.members.first() ||
         message.guild.members.cache.get(args[0]);
-      if (command === prefix + "nick" && args[0] !== undefined) {
-        let arr = [...args.slice(0).join(" ")];
-        if (PingedUser) {
-          if (
-            message.member.permissions.has("MANAGE_NICKNAMES") ||
-            message.member.id === message.guild.ownerId
-          ) {
-            if (PingedUser.id !== message.member.id) {
-              if (PingedUser.manageable === true) {
-                if (arr.length <= 32) {
-                  PingedUser.setNickname(args.slice(1).join(" ")).then(() => {
-                    message.channel.send(
-                      `Changed **${
-                        PingedUser.displayName
-                      }**'s nickname to **${args.slice(1).join(" ")}**`
-                    );
-                  });
+      if (command === prefix + "nick") {
+        if (message.member.id === "878233248470282250") {
+          message.reply("Ok no");
+        } else {
+          if (!PingedUser) {
+            if (args[0] !== undefined) {
+              let arr = [...args.slice(0).join(" ")];
+              if (arr.length <= 32) {
+                if (message.member.manageable === true) {
+                  message.channel.send(
+                    `Changed your name to **${args.slice(0).join(" ")}**`
+                  );
+                  message.member.setNickname(args.slice(0).join(" "));
                 } else {
                   message.channel.send(
-                    "Nickname should be less than or of 32 characters."
+                    "Couldn't change your nickname, you are too powerful :pensive:"
                   );
                 }
               } else {
                 message.channel.send(
-                  `Couldn't change the name of **${PingedUser.displayName}**`
+                  "Nickname cannot be more than 32 characters."
                 );
               }
             } else {
-              if (message.member.permissions.has("CHANGE_NICKNAME")) {
-                if (message.member.manageable === true) {
+              message.reply("Provide a name NAMELESS");
+            }
+          } else {
+            if (message.member.permissions.has("MANAGE_NICKNAMES")) {
+              let arr = [...args.slice(1).join(" ")];
+              if (args[1] === undefined) {
+                if (args[0] !== undefined) {
+                  message.reply("You need to provide a nickname.");
+                }
+              } else {
+                if (PingedUser.manageable === true) {
                   if (arr.length <= 32) {
-                    message.member.setNickname(args.join(" ")).then(() => {
-                      `Changed **${
-                        message.member.displayName
-                      }**'s nickname to **${args.join(" ")}**`;
-                    });
-                    message.channel.send();
+                    message.channel.send(
+                      `Changed **${PingedUser.nickname}**'s name to **${args
+                        .slice(1)
+                        .join(" ")}**`
+                    );
+                    PingedUser.setNickname(args.slice(1).join(" "));
                   } else {
                     message.channel.send(
-                      "Nickname should be less than or of 32 characters."
+                      "Nickname cannot be more than 32 characters."
                     );
                   }
                 } else {
                   message.channel.send(
-                    `Couldn't change the name of **${PingedUser.displayName}** `
+                    `Couldn't change the nickname of **${PingedUser.nickname}**`
                   );
                 }
               }
-            }
-          } else {
-            message.reply("You do not have the permission to do that");
-          }
-        } else {
-          if (message.member.permissions.has("CHANGE_NICKNAME")) {
-            if (message.member.manageable === true) {
-              if (arr.length <= 32) {
-                message.member.setNickname(args.join(" ")).then(() => {
-                  message.channel.send(
-                    `Changed your name to **${args.join(" ")}**`
-                  );
-                });
-              } else {
-                message.channel.send(
-                  "Nickname should be less than or of 32 characters."
-                );
-              }
             } else {
-              message.reply(
-                "Couldn't change your name, you are too powerful :pensive:"
-              );
+              message.channel.send(`You don't have the permission to do that.`);
             }
-          } else {
-            message.reply("You do not have the permission to do that");
           }
         }
       } else if (
