@@ -4,6 +4,6 @@ module.exports = {
     description: "Link to the bot's GitHub repository",
   },
   execute(interaction) {
-    interaction.reply("");
+    interaction.reply("https://github.com/JasjitBansia/Makhani-Parchai");
   },
 };

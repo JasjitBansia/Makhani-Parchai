@@ -30,6 +30,7 @@ const commands = [
   commandFiles.weather.command,
   commandFiles.handpic.command,
   commandFiles.bitcoin.command,
+  commandFiles.repository.command,
 ];
 
 async function main() {
@@ -73,6 +74,9 @@ client.on("interactionCreate", async (interaction) => {
       }
       if (interaction.commandName === "bitcoin") {
         commandFiles.bitcoin.chatInputCommand(interaction);
+      }
+      if (interaction.commandName === "repository") {
+        commandFiles.repository.execute(interaction);
       }
     } catch (error) {
       interaction.reply(error.message);
