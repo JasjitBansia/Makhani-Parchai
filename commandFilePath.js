@@ -9,4 +9,5 @@ module.exports = {
   handpic: require("./commands/Questionable Commands/handpic.js"),
   bitcoin: require("./commands/Questionable Commands/bitcoin.js"),
   repository: require("./commands/Bot Commands/repository.js"),
+  meaning: require("./commands/Utility Commands/meaning.js"),
 };

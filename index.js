@@ -31,6 +31,7 @@ const commands = [
   commandFiles.handpic.command,
   commandFiles.bitcoin.command,
   commandFiles.repository.command,
+  commandFiles.meaning.command,
 ];
 
 async function main() {
@@ -45,7 +46,7 @@ async function main() {
 
 main();
 
-client.on("interactionCreate", async (interaction) => {
+client.on("interactionCreate", (interaction) => {
   if (interaction.isChatInputCommand()) {
     try {
       if (interaction.commandName === "ping") {
@@ -77,6 +78,9 @@ client.on("interactionCreate", async (interaction) => {
       }
       if (interaction.commandName === "repository") {
         commandFiles.repository.execute(interaction);
+      }
+      if (interaction.commandName === "meaning") {
+        commandFiles.meaning.execute(interaction);
       }
     } catch (error) {
       interaction.reply(error.message);

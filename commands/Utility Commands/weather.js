@@ -37,21 +37,8 @@ module.exports = {
           }`.toString()
         )
         .setDescription(
-          `\n\n **Weather Information**   
-             \n Temperature: **${weatherData.main.feels_like}**°C ‎ ‎ ‎ ‎
-             Description: **${weatherData.weather[0].main}**
-             Humidity: **${weatherData.main.humidity}%** 
-             Wind: **${weatherData.wind.speed} km/h**
-             \n **Locality**
-             \n Name: **${weatherData.name}**
-             Country: **${weatherData.sys.country}**
-             Latitude: **${weatherData.coord.lat}**
-             Longitude: **${weatherData.coord.lon}**`
-        )
-        .setThumbnail(
-          "https://o.remove.bg/downloads/af9f9988-9083-4d8e-89b2-492b8fd66736/vector-sun-icon-removebg-preview.png"
+          `\n\n**Weather Information** \n\nTemperature: **${weatherData.main.feels_like}**°C \nDescription: **${weatherData.weather[0].main}** \nHumidity: **${weatherData.main.humidity}%** \nWind: **${weatherData.wind.speed} km/h** \n\n**Locality** \n\nName:**${weatherData.name}** \nCountry: **${weatherData.sys.country}** \nLatitude: **${weatherData.coord.lat}** \nLongitude: **${weatherData.coord.lon}**`
         );
-
       interaction.reply({ embeds: [weatherEmbed] });
     } catch {
       interaction.reply("An error occurred while fetching the information.");
