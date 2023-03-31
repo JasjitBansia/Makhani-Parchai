@@ -10,4 +10,6 @@ module.exports = {
   bitcoin: require("./commands/Questionable Commands/bitcoin.js"),
   repository: require("./commands/Bot Commands/repository.js"),
   meaning: require("./commands/Utility Commands/meaning.js"),
+  come: require("./commands/Questionable Commands/come"),
+  commandList: require("./commands/Bot Commands/commandList.js"),
 };

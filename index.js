@@ -19,7 +19,6 @@ client.on("ready", () => {
 });
 
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
-
 const commands = [
   commandFiles.ping.command,
   commandFiles.randomUser.command,
@@ -32,6 +31,8 @@ const commands = [
   commandFiles.bitcoin.command,
   commandFiles.repository.command,
   commandFiles.meaning.command,
+  commandFiles.come.command,
+  commandFiles.commandList.command,
 ];
 
 async function main() {
@@ -82,6 +83,12 @@ client.on("interactionCreate", (interaction) => {
       if (interaction.commandName === "meaning") {
         commandFiles.meaning.execute(interaction);
       }
+      if (interaction.commandName === "come") {
+        commandFiles.come.execute(interaction);
+      }
+      if (interaction.commandName === "commandlist") {
+        commandFiles.commandList.execute(interaction, commands);
+      }
     } catch (error) {
       interaction.reply(error.message);
     }
@@ -103,7 +110,7 @@ client.on("messageCreate", (message) => {
       commandFiles.handpic.execute(message);
     }
   } catch (error) {
-    interaction.reply(error.message);
+    message.reply(error.message);
   }
 });
 client.login(tokens.bot);
