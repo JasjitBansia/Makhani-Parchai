@@ -81,7 +81,9 @@ client.on("interactionCreate", (interaction) => {
         commandFiles.repository.execute(interaction);
       }
       if (interaction.commandName === "meaning") {
-        commandFiles.meaning.execute(interaction);
+        interaction.reply(
+          `The meaning command is not working due to a Discord.js deferReply issue. I apologise for the knowledge and wisdom you are missing out on due to this`
+        );
       }
       if (interaction.commandName === "come") {
         commandFiles.come.execute(interaction);
@@ -108,6 +110,18 @@ client.on("messageCreate", (message) => {
     }
     if (message.content.toLowerCase() === prefix + "handpic") {
       commandFiles.handpic.execute(message);
+    }
+    if (
+      message.content.includes("ara") &&
+      message.author.id !== "539796772323590164"
+    ) {
+      try {
+        setTimeout(() => {
+          message.reactions.removeAll();
+        }, 10000);
+      } catch {
+        return null;
+      }
     }
   } catch (error) {
     message.reply(error.message);
