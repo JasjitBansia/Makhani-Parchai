@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require("discord.js");
-const wait = require("node:timers/promises").setTimeout;
 module.exports = {
   command: {
     name: "meaning",
@@ -31,7 +30,6 @@ module.exports = {
           }`
         );
       await interaction.deferReply();
-      await wait(5000);
       await interaction.editReply({ embeds: [embed] });
     } catch {
       interaction.reply("No definitions found.");

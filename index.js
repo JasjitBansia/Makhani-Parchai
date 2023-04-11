@@ -47,7 +47,7 @@ async function main() {
 
 main();
 
-client.on("interactionCreate", (interaction) => {
+client.on("interactionCreate", async (interaction) => {
   if (interaction.isChatInputCommand()) {
     try {
       if (interaction.commandName === "ping") {
@@ -111,6 +111,7 @@ client.on("messageCreate", (message) => {
     if (message.content.toLowerCase() === prefix + "handpic") {
       commandFiles.handpic.execute(message);
     }
+
     if (
       message.content.includes("ara") &&
       message.author.id !== "539796772323590164"
