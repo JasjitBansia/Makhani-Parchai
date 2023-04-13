@@ -30,16 +30,22 @@ const commands = [
   commandFiles.handpic.command,
   commandFiles.bitcoin.command,
   commandFiles.repository.command,
-  commandFiles.meaning.command,
   commandFiles.come.command,
   commandFiles.commandList.command,
+  commandFiles.copy_paste.command,
 ];
 
 async function main() {
   try {
-    await rest.put(Routes.applicationCommands("764047181228408873"), {
-      body: commands,
-    });
+    await rest.put(
+      Routes.applicationGuildCommands(
+        "764047181228408873",
+        "790827946746314782"
+      ),
+      {
+        body: commands,
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -80,16 +86,14 @@ client.on("interactionCreate", async (interaction) => {
       if (interaction.commandName === "repository") {
         commandFiles.repository.execute(interaction);
       }
-      if (interaction.commandName === "meaning") {
-        interaction.reply(
-          `The meaning command is not working due to a Discord.js deferReply issue. I apologise for the knowledge and wisdom you are missing out on due to this`
-        );
-      }
       if (interaction.commandName === "come") {
         commandFiles.come.execute(interaction);
       }
       if (interaction.commandName === "commandlist") {
         commandFiles.commandList.execute(interaction, commands);
+      }
+      if (interaction.commandName === "copy_paste") {
+        commandFiles.copy_paste.execute(interaction);
       }
     } catch (error) {
       interaction.reply(error.message);
