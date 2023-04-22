@@ -1,4 +1,13 @@
-const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
+const {
+  Client,
+  GatewayIntentBits,
+  REST,
+  Routes,
+  EmbedBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+} = require("discord.js");
 const commandFiles = require("./commandFilePath.js");
 const tokens = require("./tokens.json");
 
@@ -33,19 +42,14 @@ const commands = [
   commandFiles.come.command,
   commandFiles.commandList.command,
   commandFiles.copy_paste.command,
+  commandFiles.wipeout.command,
 ];
 
 async function main() {
   try {
-    await rest.put(
-      Routes.applicationGuildCommands(
-        "764047181228408873",
-        "790827946746314782"
-      ),
-      {
-        body: commands,
-      }
-    );
+    await rest.put(Routes.applicationCommands("764047181228408873"), {
+      body: commands,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -95,12 +99,16 @@ client.on("interactionCreate", async (interaction) => {
       if (interaction.commandName === "copy_paste") {
         commandFiles.copy_paste.execute(interaction);
       }
+      if (interaction.commandName === "wipeout") {
+        commandFiles.wipeout.chatInputCommand(interaction);
+      }
     } catch (error) {
       interaction.reply(error.message);
     }
   } else if (interaction.isButton()) {
     try {
       commandFiles.bitcoin.buttonCommand(interaction);
+      commandFiles.wipeout.buttonCommand(interaction);
     } catch (error) {
       interaction.reply(error.message);
     }
@@ -115,7 +123,6 @@ client.on("messageCreate", (message) => {
     if (message.content.toLowerCase() === prefix + "handpic") {
       commandFiles.handpic.execute(message);
     }
-
     if (
       message.content.includes("ara") &&
       message.author.id !== "539796772323590164"
