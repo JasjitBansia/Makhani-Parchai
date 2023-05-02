@@ -1,13 +1,4 @@
-const {
-  Client,
-  GatewayIntentBits,
-  REST,
-  Routes,
-  EmbedBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  ActionRowBuilder,
-} = require("discord.js");
+const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 const commandFiles = require("./commandFilePath.js");
 const tokens = require("./tokens.json");
 
@@ -115,7 +106,7 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-client.on("messageCreate", (message) => {
+client.on("messageCreate", async (message) => {
   try {
     if (message.content.toLowerCase() === prefix + "hao") {
       commandFiles.hao.message(message);
@@ -128,9 +119,9 @@ client.on("messageCreate", (message) => {
       message.author.id !== "539796772323590164"
     ) {
       try {
-        setTimeout(() => {
+        setInterval(() => {
           message.reactions.removeAll();
-        }, 10000);
+        }, 1000);
       } catch {
         return null;
       }
