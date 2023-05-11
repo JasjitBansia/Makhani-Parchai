@@ -34,12 +34,13 @@ const commands = [
   commandFiles.commandList.command,
   commandFiles.copy_paste.command,
   commandFiles.wipeout.command,
+  commandFiles.everyonePing.command,
 ];
 
 async function main() {
   try {
     await rest.put(Routes.applicationCommands("764047181228408873"), {
-      body: commands,
+      body: [],
     });
   } catch (error) {
     console.log(error);
@@ -92,6 +93,9 @@ client.on("interactionCreate", async (interaction) => {
       }
       if (interaction.commandName === "wipeout") {
         commandFiles.wipeout.chatInputCommand(interaction);
+      }
+      if (interaction.commandName === "everyoneping") {
+        commandFiles.everyonePing.execute(interaction);
       }
     } catch (error) {
       interaction.reply(error.message);
