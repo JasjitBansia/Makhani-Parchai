@@ -10,6 +10,7 @@ const client = new Client({
     GatewayIntentBits.GuildPresences,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessageReactions,
   ],
 });
 
@@ -40,7 +41,7 @@ const commands = [
 async function main() {
   try {
     await rest.put(Routes.applicationCommands("764047181228408873"), {
-      body: [],
+      body: commands,
     });
   } catch (error) {
     console.log(error);
@@ -109,7 +110,15 @@ client.on("interactionCreate", async (interaction) => {
     }
   }
 });
-
+client.on("messageReactionAdd", (reaction) => {
+  let arr = ["bonk", "block", "sniff"];
+  if (
+    arr.includes(reaction.emoji.name) &&
+    reaction.message.content.includes("ara")
+  ) {
+    reaction.remove();
+  }
+});
 client.on("messageCreate", async (message) => {
   try {
     if (message.content.toLowerCase() === prefix + "hao") {
@@ -117,18 +126,6 @@ client.on("messageCreate", async (message) => {
     }
     if (message.content.toLowerCase() === prefix + "handpic") {
       commandFiles.handpic.execute(message);
-    }
-    if (
-      message.content.includes("ara") &&
-      message.author.id !== "539796772323590164"
-    ) {
-      try {
-        setInterval(() => {
-          message.reactions.removeAll();
-        }, 1000);
-      } catch {
-        return null;
-      }
     }
   } catch (error) {
     message.reply(error.message);

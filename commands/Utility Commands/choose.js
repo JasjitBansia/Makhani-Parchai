@@ -1,47 +1,10 @@
 module.exports = {
   command: {
     name: "choose",
-    description: "Chooses a random value",
-    options: [
-      {
-        name: "a",
-        description: "First Value",
-        type: 3,
-        required: true,
-      },
-      {
-        name: "b",
-        description: "Second Value",
-        type: 3,
-        required: true,
-      },
-      {
-        name: "c",
-        description: "Third Value",
-        type: 3,
-        required: false,
-      },
-      {
-        name: "d",
-        description: "Fourth Value",
-        type: 3,
-        required: false,
-      },
-      {
-        name: "e",
-        description: "Fifth Value",
-        type: 3,
-        required: false,
-      },
-    ],
+    description: "Let the bot take decisions for you (yes or no)",
   },
   execute(interaction) {
-    let arr = [];
-    for (let i = 0; i < interaction.options.data.length; i++) {
-      arr.push(interaction.options.data[i].value);
-    }
-    interaction.reply(
-      `My choice will be **${arr[Math.floor(Math.random() * arr.length)]}**.`
-    );
+    let arr = ["Yes", "No"];
+    interaction.reply(`**${arr[Math.floor(Math.random() * arr.length)]}**`);
   },
 };
