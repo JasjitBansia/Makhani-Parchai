@@ -40,8 +40,8 @@ const commands = [
 
 async function main() {
   try {
-    await rest.put(Routes.applicationCommands("764047181228408873"), {
-      body: commands,
+    await rest.put(Routes.applicationGuildCommands("764047181228408873", "889175536780333136"), {
+      body: [],
     });
   } catch (error) {
     console.log(error);
@@ -114,8 +114,8 @@ client.on("messageReactionAdd", (reaction) => {
   let arr = ["bonk", "block", "sniff"];
   if (
     arr.includes(reaction.emoji.name) &&
-    reaction.message.content.includes("ara")
-  ) {
+    reaction.message.content.toLowerCase().includes("ara")
+  ) { 
     reaction.remove();
   }
 });

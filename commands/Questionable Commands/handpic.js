@@ -1,4 +1,4 @@
-const tokens = require("C:/Users/hello/OneDrive/Desktop/Code/Makhani Parchai/tokens.json");
+const tokens = require("C:/Users/HP/Desktop/Code/Makhani Parchai/tokens.json");
 const { EmbedBuilder } = require("discord.js");
 const { createClient } = require("pexels");
 const imageClient = createClient(`${tokens.images}`);
