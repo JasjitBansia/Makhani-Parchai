@@ -18,7 +18,6 @@ client.on("ready", () => {
   console.log("Online");
   client.user.setPresence({ status: "dnd" });
 });
-
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
 const commands = [
   commandFiles.ping.command,
@@ -36,13 +35,21 @@ const commands = [
   commandFiles.copy_paste.command,
   commandFiles.wipeout.command,
   commandFiles.everyonePing.command,
+  commandFiles.setAvatar.command
+ 
 ];
 
 async function main() {
   try {
-    await rest.put(Routes.applicationGuildCommands("764047181228408873", "889175536780333136"), {
-      body: [],
-    });
+    await rest.put(
+      Routes.applicationGuildCommands(
+        "764047181228408873",
+        "790827946746314782"
+      ),
+      {
+        body: commands,
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -98,6 +105,9 @@ client.on("interactionCreate", async (interaction) => {
       if (interaction.commandName === "everyoneping") {
         commandFiles.everyonePing.execute(interaction);
       }
+      if (interaction.commandName === "set_avatar") {
+       commandFiles.setAvatar.execute(interaction, client)
+      }
     } catch (error) {
       interaction.reply(error.message);
     }
@@ -110,12 +120,13 @@ client.on("interactionCreate", async (interaction) => {
     }
   }
 });
+
 client.on("messageReactionAdd", (reaction) => {
   let arr = ["bonk", "block", "sniff"];
   if (
     arr.includes(reaction.emoji.name) &&
     reaction.message.content.toLowerCase().includes("ara")
-  ) { 
+  ) {
     reaction.remove();
   }
 });
@@ -128,7 +139,7 @@ client.on("messageCreate", async (message) => {
       commandFiles.handpic.execute(message);
     }
   } catch (error) {
-    message.reply(error.message);
+    console.log(error);
   }
 });
 client.login(tokens.bot);

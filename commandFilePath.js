@@ -14,4 +14,5 @@ module.exports = {
   copy_paste: require("./commands/Fun Commands/copy_paste.js"),
   wipeout: require("./commands/Questionable Commands/wipeout.js"),
   everyonePing: require("./commands/Questionable Commands/everyonePing.js"),
+  setAvatar: require("./commands/Bot Commands/setAvatar.js")
 };
