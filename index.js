@@ -42,12 +42,11 @@ const commands = [
 async function main() {
   try {
     await rest.put(
-      Routes.applicationGuildCommands(
+      Routes.applicationCommands(
         "764047181228408873",
-        "790827946746314782"
       ),
       {
-        body: commands,
+        body: [],
       }
     );
   } catch (error) {

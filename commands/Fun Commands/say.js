@@ -12,6 +12,7 @@ module.exports = {
     ],
   },
   execute(interaction) {
+    interaction.reply({content: "Message sent", ephemeral: true})
     interaction.channel.send(interaction.options.data[0].value);
   },
 };
