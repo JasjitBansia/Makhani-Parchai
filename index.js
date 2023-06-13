@@ -35,20 +35,14 @@ const commands = [
   commandFiles.copy_paste.command,
   commandFiles.wipeout.command,
   commandFiles.everyonePing.command,
-  commandFiles.setAvatar.command
- 
+  commandFiles.setAvatar.command,
 ];
 
 async function main() {
   try {
-    await rest.put(
-      Routes.applicationCommands(
-        "764047181228408873",
-      ),
-      {
-        body: [],
-      }
-    );
+    await rest.put(Routes.applicationCommands("764047181228408873"), {
+      body: [],
+    });
   } catch (error) {
     console.log(error);
   }
@@ -105,7 +99,7 @@ client.on("interactionCreate", async (interaction) => {
         commandFiles.everyonePing.execute(interaction);
       }
       if (interaction.commandName === "set_avatar") {
-       commandFiles.setAvatar.execute(interaction, client)
+        commandFiles.setAvatar.execute(interaction, client);
       }
     } catch (error) {
       interaction.reply(error.message);
@@ -136,6 +130,11 @@ client.on("messageCreate", async (message) => {
     }
     if (message.content.toLowerCase() === prefix + "handpic") {
       commandFiles.handpic.execute(message);
+    }
+    if (message.content.toLowerCase() === prefix + "pinned") {
+      let pinnedMessages = (await message.channel.messages.fetchPinned()).size.toString()
+      let possibleToPin = 50 - parseInt(pinnedMessages)
+      message.reply(`${pinnedMessages} messages pinned in this channel. ${possibleToPin.toString()} more can be pinned`)
     }
   } catch (error) {
     console.log(error);
