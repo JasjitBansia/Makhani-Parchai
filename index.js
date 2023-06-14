@@ -36,13 +36,20 @@ const commands = [
   commandFiles.wipeout.command,
   commandFiles.everyonePing.command,
   commandFiles.setAvatar.command,
+  commandFiles.pinnedMessages.command,
 ];
 
 async function main() {
   try {
-    await rest.put(Routes.applicationCommands("764047181228408873"), {
-      body: [],
-    });
+    await rest.put(
+      Routes.applicationGuildCommands(
+        "764047181228408873",
+        "790827946746314782"
+      ),
+      {
+        body: commands,
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -101,6 +108,9 @@ client.on("interactionCreate", async (interaction) => {
       if (interaction.commandName === "set_avatar") {
         commandFiles.setAvatar.execute(interaction, client);
       }
+      if (interaction.commandName === "pinned") {
+        commandFiles.pinnedMessages.execute(interaction)
+      }
     } catch (error) {
       interaction.reply(error.message);
     }
@@ -132,9 +142,11 @@ client.on("messageCreate", async (message) => {
       commandFiles.handpic.execute(message);
     }
     if (message.content.toLowerCase() === prefix + "pinned") {
-      let pinnedMessages = (await message.channel.messages.fetchPinned()).size.toString()
-      let possibleToPin = 50 - parseInt(pinnedMessages)
-      message.reply(`${pinnedMessages} messages pinned in this channel. ${possibleToPin.toString()} more can be pinned`)
+      let pinnedMessages = (
+        await message.channel.messages.fetchPinned()
+      ).size.toString();
+      let possibleToPin = 50 - parseInt(pinnedMessages);
+     commandFiles.pinnedMessages.embed(message, pinnedMessages, possibleToPin)
     }
   } catch (error) {
     console.log(error);
