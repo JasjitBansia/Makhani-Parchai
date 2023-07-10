@@ -37,14 +37,14 @@ const commands = [
   commandFiles.everyonePing.command,
   commandFiles.setAvatar.command,
   commandFiles.pinnedMessages.command,
-];
+  commandFiles.guilds.command
+]
 
 async function main() {
   try {
     await rest.put(
       Routes.applicationGuildCommands(
-        "764047181228408873",
-        "790827946746314782"
+        "764047181228408873", "790827946746314782"
       ),
       {
         body: commands,
@@ -54,7 +54,6 @@ async function main() {
     console.log(error);
   }
 }
-
 main();
 
 client.on("interactionCreate", async (interaction) => {
@@ -111,6 +110,9 @@ client.on("interactionCreate", async (interaction) => {
       if (interaction.commandName === "pinned") {
         commandFiles.pinnedMessages.execute(interaction)
       }
+      if (interaction.commandName === "guilds") {
+        commandFiles.guilds.execute(interaction, client)
+      }
     } catch (error) {
       interaction.reply(error.message);
     }
@@ -141,14 +143,19 @@ client.on("messageCreate", async (message) => {
     if (message.content.toLowerCase() === prefix + "handpic") {
       commandFiles.handpic.execute(message);
     }
+    if (message.content === prefix + "server") {
+    
+    }
     if (message.content.toLowerCase() === prefix + "pinned") {
       let pinnedMessages = (
         await message.channel.messages.fetchPinned()
       ).size.toString();
       let possibleToPin = 50 - parseInt(pinnedMessages);
-     commandFiles.pinnedMessages.embed(message, pinnedMessages, possibleToPin)
+      commandFiles.pinnedMessages.embed(message, pinnedMessages, possibleToPin)
     }
-  } catch (error) {
+
+  }
+  catch (error) {
     console.log(error);
   }
 });
