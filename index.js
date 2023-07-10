@@ -143,9 +143,6 @@ client.on("messageCreate", async (message) => {
     if (message.content.toLowerCase() === prefix + "handpic") {
       commandFiles.handpic.execute(message);
     }
-    if (message.content === prefix + "server") {
-    
-    }
     if (message.content.toLowerCase() === prefix + "pinned") {
       let pinnedMessages = (
         await message.channel.messages.fetchPinned()
