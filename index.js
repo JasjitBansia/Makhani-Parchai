@@ -17,6 +17,8 @@ const client = new Client({
 client.on("ready", () => {
   console.log("Online");
   client.user.setPresence({ status: "dnd" });
+  let privateStuff = require("./privatestuff.js")
+  privateStuff.execute(client)
 });
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
 const commands = [
@@ -47,7 +49,7 @@ async function main() {
         "764047181228408873", "790827946746314782"
       ),
       {
-        body: commands,
+        body: [],
       }
     );
   } catch (error) {
