@@ -20,7 +20,7 @@ module.exports = {
 
     interaction.reply({ embeds: [initialEmbed], components: [row] });
   },
-  buttonCommand(interaction) {
+  async buttonCommand(interaction) {
     if (interaction.customId === "Toss") {
       let images = {
         Head: "https://i.ibb.co/rwjg7WV/head.png",
@@ -32,15 +32,11 @@ module.exports = {
         .setTitle(`It's ${randomimage}`)
         .setImage(`${images[randomimage]}`)
         .setColor("Green");
-      interaction.update({ embeds: [embed], components: [] });
+     await interaction.update({ embeds: [embed], components: [] });
       if (randomimage === "Head") {
-        setTimeout(() => {
-          interaction.channel.send("https://i.ibb.co/2h6qRvJ/finalhead.jpg");
-        }, 3000);
+        interaction.channel.send("https://i.ibb.co/2h6qRvJ/finalhead.jpg");
       } else {
-        setTimeout(() => {
-          interaction.channel.send("https://i.ibb.co/NC2DqTW/finaltail.jpg");
-        }, 3000);
+        interaction.channel.send("https://i.ibb.co/NC2DqTW/finaltail.jpg");
       }
     }
   },
