@@ -39,7 +39,8 @@ const commands = [
   commandFiles.everyonePing.command,
   commandFiles.setAvatar.command,
   commandFiles.pinnedMessages.command,
-  commandFiles.guilds.command
+  commandFiles.guilds.command,
+  commandFiles.getAvatar.command
 ]
 
 async function main() {
@@ -114,6 +115,9 @@ client.on("interactionCreate", async (interaction) => {
       }
       if (interaction.commandName === "guilds") {
         commandFiles.guilds.execute(interaction, client)
+      }
+      if (interaction.commandName === "get-avatar") {
+        commandFiles.getAvatar.execute(client, interaction)
       }
     } catch (error) {
       interaction.reply(error.message);

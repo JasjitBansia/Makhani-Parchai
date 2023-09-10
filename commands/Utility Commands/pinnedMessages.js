@@ -7,7 +7,7 @@ module.exports = {
   embed(interaction, pinnedMessages, possibleToPin) {
     let embed = new EmbedBuilder()
       .setDescription(
-        `Total messages pinned: ${pinnedMessages} \n Messages possible to pin: ${possibleToPin}`
+        `Total messages pinned: ${pinnedMessages} \nMessages possible to pin: ${possibleToPin}`
       )
       .setColor("Green");
     interaction.reply({ embeds: [embed] });

@@ -16,5 +16,6 @@ module.exports = {
   everyonePing: require("./commands/Questionable Commands/everyonePing.js"),
   setAvatar: require("./commands/Bot Commands/setAvatar.js"),
   pinnedMessages: require("./commands/Utility Commands/pinnedMessages.js"),
-  guilds: require("./commands/Bot Commands/guilds.js")
+  guilds: require("./commands/Bot Commands/guilds.js"),
+  getAvatar: require("./commands/Utility Commands/get-avatar.js")
 };
