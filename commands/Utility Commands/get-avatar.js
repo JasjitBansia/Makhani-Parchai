@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require("discord.js")
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js")
 module.exports = {
     command: {
         name: "get-avatar",
@@ -15,8 +15,15 @@ module.exports = {
         try {
             let userID = interaction.options.data[0].user.id
             let user = client.users.cache.get(userID)
+            console.log(user.displayAvatarURL())
             let embed = new EmbedBuilder().setTitle(`Avatar of ${user.username}`).setImage(user.displayAvatarURL({ size: 2048, dynamic: true })).setColor("Green")
-            interaction.reply({ embeds: [embed] })
+            let row = new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                  .setLabel("Open in browser")
+                  .setStyle(ButtonStyle.Link)
+                  .setURL(`${user.displayAvatarURL()}`)
+              );
+            interaction.reply({ embeds: [embed], components: [row] })
         }
         catch (error) {
             interaction.reply("An error occurred")
