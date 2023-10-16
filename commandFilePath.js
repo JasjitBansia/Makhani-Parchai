@@ -4,11 +4,7 @@ module.exports = {
   say: require("./commands/Fun Commands/say.js"),
   hao: require("./commands/Questionable Commands/hao.js"),
   be: require("./commands/Bot Commands/be.js"),
-  choose: require("./commands/Utility Commands/choose.js"),
-  weather: require("./commands/Utility Commands/weather.js"),
-  handpic: require("./commands/Questionable Commands/handpic.js"),
   bitcoin: require("./commands/Questionable Commands/bitcoin.js"),
-  repository: require("./commands/Bot Commands/repository.js"),
   come: require("./commands/Questionable Commands/come"),
   commandList: require("./commands/Bot Commands/commandList.js"),
   copy_paste: require("./commands/Fun Commands/copy_paste.js"),
@@ -17,5 +13,5 @@ module.exports = {
   setAvatar: require("./commands/Bot Commands/setAvatar.js"),
   pinnedMessages: require("./commands/Utility Commands/pinnedMessages.js"),
   guilds: require("./commands/Bot Commands/guilds.js"),
-  getAvatar: require("./commands/Utility Commands/get-avatar.js")
+  getAvatar: require("./commands/Utility Commands/get-avatar.js"),
 };

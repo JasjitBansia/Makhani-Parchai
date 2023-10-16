@@ -17,8 +17,8 @@ const client = new Client({
 client.on("ready", () => {
   console.log("Online");
   client.user.setPresence({ status: "dnd" });
-  let privateStuff = require("./privatestuff.js")
-  privateStuff.execute(client)
+  let privateStuff = require("./privatestuff.js");
+  privateStuff.execute(client);
 });
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
 const commands = [
@@ -40,19 +40,14 @@ const commands = [
   commandFiles.setAvatar.command,
   commandFiles.pinnedMessages.command,
   commandFiles.guilds.command,
-  commandFiles.getAvatar.command
-]
+  commandFiles.getAvatar.command,
+];
 
 async function main() {
   try {
-    await rest.put(
-      Routes.applicationGuildCommands(
-        "764047181228408873", "790827946746314782"
-      ),
-      {
-        body: [],
-      }
-    );
+    await rest.put(Routes.applicationCommands("764047181228408873"), {
+      body: commands,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -111,13 +106,13 @@ client.on("interactionCreate", async (interaction) => {
         commandFiles.setAvatar.execute(interaction, client);
       }
       if (interaction.commandName === "pinned") {
-        commandFiles.pinnedMessages.execute(interaction)
+        commandFiles.pinnedMessages.execute(interaction);
       }
       if (interaction.commandName === "guilds") {
-        commandFiles.guilds.execute(interaction, client)
+        commandFiles.guilds.execute(interaction, client);
       }
       if (interaction.commandName === "get-avatar") {
-        commandFiles.getAvatar.execute(client, interaction)
+        commandFiles.getAvatar.execute(client, interaction);
       }
     } catch (error) {
       interaction.reply(error.message);
@@ -146,6 +141,7 @@ client.on("messageCreate", async (message) => {
     if (message.content.toLowerCase() === prefix + "hao") {
       commandFiles.hao.message(message);
     }
+
     if (message.content.toLowerCase() === prefix + "handpic") {
       commandFiles.handpic.execute(message);
     }
@@ -154,11 +150,9 @@ client.on("messageCreate", async (message) => {
         await message.channel.messages.fetchPinned()
       ).size.toString();
       let possibleToPin = 50 - parseInt(pinnedMessages);
-      commandFiles.pinnedMessages.embed(message, pinnedMessages, possibleToPin)
+      commandFiles.pinnedMessages.embed(message, pinnedMessages, possibleToPin);
     }
-
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
 });
