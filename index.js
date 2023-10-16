@@ -27,11 +27,7 @@ const commands = [
   commandFiles.say.command,
   commandFiles.hao.command,
   commandFiles.be.command,
-  commandFiles.choose.command,
-  commandFiles.weather.command,
-  commandFiles.handpic.command,
   commandFiles.bitcoin.command,
-  commandFiles.repository.command,
   commandFiles.come.command,
   commandFiles.commandList.command,
   commandFiles.copy_paste.command,
@@ -72,20 +68,8 @@ client.on("interactionCreate", async (interaction) => {
       if (interaction.commandName === "be") {
         commandFiles.be.execute(interaction, client);
       }
-      if (interaction.commandName === "choose") {
-        commandFiles.choose.execute(interaction);
-      }
-      if (interaction.commandName === "weather") {
-        commandFiles.weather.execute(interaction);
-      }
-      if (interaction.commandName === "handpic") {
-        commandFiles.handpic.execute(interaction);
-      }
       if (interaction.commandName === "bitcoin") {
         commandFiles.bitcoin.chatInputCommand(interaction);
-      }
-      if (interaction.commandName === "repository") {
-        commandFiles.repository.execute(interaction);
       }
       if (interaction.commandName === "come") {
         commandFiles.come.execute(interaction);
@@ -140,10 +124,6 @@ client.on("messageCreate", async (message) => {
   try {
     if (message.content.toLowerCase() === prefix + "hao") {
       commandFiles.hao.message(message);
-    }
-
-    if (message.content.toLowerCase() === prefix + "handpic") {
-      commandFiles.handpic.execute(message);
     }
     if (message.content.toLowerCase() === prefix + "pinned") {
       let pinnedMessages = (
