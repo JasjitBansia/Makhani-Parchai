@@ -1,4 +1,4 @@
-let inProgress = false
+let inProgress = false;
 module.exports = {
   command: {
     name: "come",
@@ -28,14 +28,14 @@ module.exports = {
   async execute(interaction) {
     let user = `<@${interaction.options.data[0].user.id}>`;
     let numberOfPings = interaction.options.data[1].value;
-    let timesSent = 0
+    let timesSent = 0;
     let sendText = async (parameter) => {
       await interaction.channel.send(`${parameter} Cum here ${user}`);
-      timesSent++
+      timesSent++;
     };
     if (numberOfPings <= 20) {
       if (inProgress === false) {
-        inProgress = true
+        inProgress = true;
         interaction.reply(`Pinging...`);
         for (let i = 1; i <= numberOfPings; i++) {
           if (
@@ -47,15 +47,16 @@ module.exports = {
             await sendText("");
           }
           if (timesSent === numberOfPings) {
-            inProgress = false
+            inProgress = false;
           }
         }
-      }
-      else {
-        interaction.reply("Another summoning is already in progress, try again after it ends")
+      } else {
+        interaction.reply(
+          "Another summoning is already in progress, try again after it ends"
+        );
       }
     } else {
       interaction.reply("The limit of pings is 20.");
     }
-  }
+  },
 };

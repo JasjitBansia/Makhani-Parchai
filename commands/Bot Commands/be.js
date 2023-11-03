@@ -1,3 +1,4 @@
+const client = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
 module.exports = {
   command: {
     name: "be",
@@ -11,7 +12,7 @@ module.exports = {
       },
     ],
   },
-  async execute(interaction, client) {
+  async execute(interaction) {
     if (interaction.options.data[0].value.toString().length <= 32) {
       await interaction.guild.members.cache
         .get(client.user.id.toString())

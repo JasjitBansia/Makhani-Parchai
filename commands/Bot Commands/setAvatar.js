@@ -12,7 +12,7 @@ module.exports = {
       },
     ],
   },
-  execute(interaction, client) {
+  execute(interaction) {
     let url = interaction.options.data[0].attachment.url;
     if (cooldown === false) {
       if (
