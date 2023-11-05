@@ -1,4 +1,4 @@
-const client = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
+const { client } = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
 const {
   EmbedBuilder,
   ActionRowBuilder,

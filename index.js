@@ -12,7 +12,7 @@ const client = new Client({
     GatewayIntentBits.GuildMessageReactions,
   ],
 });
-module.exports = client;
+
 let commands = [];
 
 client.on("ready", () => {
@@ -28,7 +28,9 @@ let categories = [
   "Bot Commands",
   "Questionable Commands",
   "Fun Commands",
+  "Restricted Commands",
 ];
+module.exports = { client, categories };
 for (category of categories) {
   let commandFiles = fs
     .readdirSync(`./commands/${category}`)
@@ -41,7 +43,10 @@ for (category of categories) {
 async function main() {
   try {
     await rest.put(
-      Routes.applicationCommands("764047181228408873", "790827946746314782"),
+      Routes.applicationGuildCommands(
+        "764047181228408873",
+        "790827946746314782"
+      ),
       {
         body: commands,
       }
