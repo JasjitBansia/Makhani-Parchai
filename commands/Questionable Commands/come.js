@@ -1,4 +1,5 @@
 let inProgress = false;
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 module.exports = {
   command: {
     name: "come",
@@ -12,51 +13,46 @@ module.exports = {
       },
       {
         name: "limit",
-        description: "Number of time the bot will ping the user (max 20)",
+        description: "Number of time the bot will ping the user",
         type: 4,
         required: true,
       },
-      {
-        name: "enlarge",
-        description: "Enlarge the text",
-        type: 5,
-        required: false,
-      },
     ],
   },
-
   async execute(interaction) {
     let user = `<@${interaction.options.data[0].user.id}>`;
     let numberOfPings = interaction.options.data[1].value;
     let timesSent = 0;
-    let sendText = async (parameter) => {
-      await interaction.channel.send(`${parameter} Cum here ${user}`);
-      timesSent++;
-    };
-    if (numberOfPings <= 20) {
-      if (inProgress === false) {
-        inProgress = true;
-        interaction.reply(`Pinging...`);
-        for (let i = 1; i <= numberOfPings; i++) {
-          if (
-            interaction.options.data[2] &&
-            interaction.options.data[2].value === true
-          ) {
-            await sendText("#");
-          } else {
-            await sendText("");
-          }
-          if (timesSent === numberOfPings) {
-            inProgress = false;
-          }
+    let text = `Cum here ${user}`;
+    let row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setLabel("Stop")
+        .setStyle(ButtonStyle.Danger)
+        .setCustomId("stop")
+    );
+    if (inProgress === false) {
+      inProgress = true;
+      interaction.reply(`Pinging...`);
+      for (let i = 1; i <= numberOfPings; i++) {
+        await interaction.channel.send(`Cum here ${user}`);
+        timesSent++;
+        if (timesSent === numberOfPings) {
+          inProgress = false;
         }
-      } else {
-        interaction.reply(
-          "Another summoning is already in progress, try again after it ends"
-        );
+        if (timesSent % 20 === 0 && numberOfPings >= 50) {
+          interaction.channel.send({ content: text, components: [row] });
+        }
       }
     } else {
-      interaction.reply("The limit of pings is 20.");
+      interaction.reply(
+        "Another summoning is already in progress, try again after it ends"
+      );
+    }
+  },
+  async buttonCommand(interaction) {
+    if (interaction.customId === "stop") {
+      await interaction.reply("Stopped the summoning");
+      process.exit(1);
     }
   },
 };

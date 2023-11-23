@@ -2,7 +2,6 @@ const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 const fs = require("fs");
 const tokens = require("./tokens.json");
 const prefix = "*";
-
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -42,23 +41,17 @@ for (category of categories) {
 }
 async function main() {
   try {
-    await rest.put(
-      Routes.applicationGuildCommands(
-        "764047181228408873",
-        "790827946746314782"
-      ),
-      {
-        body: commands,
-      }
-    );
+    await rest.put(Routes.applicationCommands("764047181228408873"), {
+      body: [],
+    });
   } catch (error) {
     console.log(error);
   }
 }
 main();
 
-client.on("interactionCreate", (interaction) => {
-  if (interaction.isChatInputCommand) {
+client.on("interactionCreate", async (interaction) => {
+  if (interaction.isCommand()) {
     for (category of categories) {
       let commandFiles = fs
         .readdirSync(`./commands/${category}`)
@@ -71,6 +64,10 @@ client.on("interactionCreate", (interaction) => {
         }
       }
     }
+  } else if (interaction.isButton()) {
+    //come.js's stop summoning button
+    const comeFile = require("./commands/Questionable Commands/come.js");
+    comeFile.buttonCommand(interaction);
   }
 });
 
