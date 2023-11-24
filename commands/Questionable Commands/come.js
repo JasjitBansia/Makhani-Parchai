@@ -34,13 +34,16 @@ module.exports = {
       inProgress = true;
       interaction.reply(`Pinging...`);
       for (let i = 1; i <= numberOfPings; i++) {
-        await interaction.channel.send(`Cum here ${user}`);
+        let message = await interaction.channel.send({
+          content: text,
+          components: [],
+        });
         timesSent++;
         if (timesSent === numberOfPings) {
           inProgress = false;
         }
         if (timesSent % 20 === 0 && numberOfPings >= 50) {
-          interaction.channel.send({ content: text, components: [row] });
+          message.edit({ content: text, components: [row] });
         }
       }
     } else {
@@ -50,9 +53,13 @@ module.exports = {
     }
   },
   async buttonCommand(interaction) {
-    if (interaction.customId === "stop") {
+    if (interaction.customId === "stop" && inProgress !== false) {
       await interaction.reply("Stopped the summoning");
       process.exit(1);
+    } else {
+      interaction.reply(
+        `<@${interaction.user.id}> There is no cumming going on. What are you trying to stop?`
+      );
     }
   },
 };
