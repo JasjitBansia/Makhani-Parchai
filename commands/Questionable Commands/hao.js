@@ -1,3 +1,4 @@
+const discord = require("discord.js");
 module.exports = {
   command: {
     name: "hao",
@@ -11,7 +12,9 @@ module.exports = {
       },
     ],
   },
-
+  /**
+   * @param {discord.ChatInputCommandInteraction} interaction
+   */
   execute(interaction) {
     let sendHAO = (paramater) => {
       interaction.reply(

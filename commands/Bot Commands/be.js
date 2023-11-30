@@ -1,4 +1,5 @@
 const { client } = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
+const discord = require("discord.js");
 module.exports = {
   command: {
     name: "be",
@@ -12,6 +13,9 @@ module.exports = {
       },
     ],
   },
+  /**
+   * @param {discord.ChatInputCommandInteraction} interaction
+   */
   async execute(interaction) {
     if (interaction.options.data[0].value.toString().length <= 32) {
       await interaction.guild.members.cache

@@ -1,3 +1,4 @@
+const discord = require("discord.js");
 module.exports = {
   command: {
     name: "say",
@@ -11,6 +12,10 @@ module.exports = {
       },
     ],
   },
+  /**
+   *
+   * @param {discord.ChatInputCommandInteraction} interaction
+   */
   execute(interaction) {
     interaction.reply({ content: "Message sent", ephemeral: true });
     interaction.channel.send(interaction.options.data[0].value);

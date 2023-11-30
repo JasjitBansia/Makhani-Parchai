@@ -1,3 +1,4 @@
+const discord = require("discord.js");
 module.exports = {
   command: {
     name: "copy_paste",
@@ -23,6 +24,9 @@ module.exports = {
       },
     ],
   },
+  /**
+   * @param {discord.ChatInputCommandInteraction} interaction
+   */
   execute(interaction) {
     let word = interaction.options.data[0].value;
     let count = interaction.options.data[1].value;

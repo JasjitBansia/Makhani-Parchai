@@ -1,5 +1,6 @@
 let cooldown = false;
 const { client } = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
+const discord = require("discord.js");
 module.exports = {
   command: {
     name: "set_avatar",
@@ -13,6 +14,9 @@ module.exports = {
       },
     ],
   },
+  /**
+   * @param {discord.ChatInputCommandInteraction} interaction
+   */
   execute(interaction) {
     let url = interaction.options.data[0].attachment.url;
     if (cooldown === false) {

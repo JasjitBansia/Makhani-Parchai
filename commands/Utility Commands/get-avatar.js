@@ -1,4 +1,5 @@
 const { client } = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
+const discord = require("discord.js");
 const {
   EmbedBuilder,
   ActionRowBuilder,
@@ -18,6 +19,9 @@ module.exports = {
       },
     ],
   },
+  /**
+   * @param {discord.ChatInputCommandInteraction} interaction
+   */
   execute(interaction) {
     try {
       let userID = interaction.options.data[0].user.id;

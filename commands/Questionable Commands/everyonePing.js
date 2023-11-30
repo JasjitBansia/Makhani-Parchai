@@ -1,3 +1,4 @@
+const discord = require("discord.js");
 module.exports = {
   command: {
     name: "everyoneping",
@@ -11,6 +12,9 @@ module.exports = {
       },
     ],
   },
+  /**
+   * @param {discord.ChatInputCommandInteraction} interaction
+   */
   execute(interaction) {
     let allowedUsers = [
       719573984873676860, 924943151301554186, 539796772323590164,

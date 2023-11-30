@@ -1,5 +1,5 @@
 let inProgress = false;
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const discord = require("discord.js");
 module.exports = {
   command: {
     name: "come",
@@ -24,10 +24,10 @@ module.exports = {
     let numberOfPings = interaction.options.data[1].value;
     let timesSent = 0;
     let text = `Cum here ${user}`;
-    let row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
+    let row = new discord.ActionRowBuilder().addComponents(
+      new discord.ButtonBuilder()
         .setLabel("Stop")
-        .setStyle(ButtonStyle.Danger)
+        .setStyle(discord.ButtonStyle.Danger)
         .setCustomId("stop")
     );
     if (inProgress === false) {
