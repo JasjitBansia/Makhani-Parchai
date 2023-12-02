@@ -3,7 +3,7 @@ const { client } = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
 const discord = require("discord.js");
 module.exports = {
   command: {
-    name: "set_avatar",
+    name: "set-avatar",
     description: "Set the bot's avatar",
     options: [
       {
@@ -18,16 +18,17 @@ module.exports = {
    * @param {discord.ChatInputCommandInteraction} interaction
    */
   execute(interaction) {
-    let url = interaction.options.data[0].attachment.url;
+    let attachment = interaction.options.data[0].attachment;
     if (cooldown === false) {
       if (
-        url.endsWith(".png") ||
-        url.endsWith(".jpg") ||
-        url.endsWith(".jpeg")
+        attachment.contentType === "image/png" ||
+        attachment.contentType === "image/jpg" ||
+        attachment.contentType === "image/jpeg" ||
+        attachment.contentType === "image/webp"
       ) {
         interaction.reply("Changing avatar...");
         client.user
-          .setAvatar(interaction.options.data[0].attachment.url)
+          .setAvatar(attachment.url)
           .then(() => {
             interaction.editReply("Avatar set");
             cooldown = true;
@@ -40,7 +41,7 @@ module.exports = {
           });
       } else {
         interaction.reply(
-          "Not a supported file format. Supported formats are `.png`, `.jpg`, `.jpeg`"
+          "Not a supported file format. Supported formats are `.png`, `.jpg`, `.jpeg` and `.webp`"
         );
       }
     } else {

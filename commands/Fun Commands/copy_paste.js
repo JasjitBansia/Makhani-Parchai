@@ -1,7 +1,7 @@
 const discord = require("discord.js");
 module.exports = {
   command: {
-    name: "copy_paste",
+    name: "copy-paste",
     description: "Mass sends a message",
     options: [
       {
@@ -11,7 +11,7 @@ module.exports = {
         required: true,
       },
       {
-        name: "send_count",
+        name: "send-count",
         description: "Number of times it will copy paste",
         type: 4,
         required: true,
