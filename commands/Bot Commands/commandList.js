@@ -1,6 +1,4 @@
-const {
-  categories,
-} = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
+const { categories } = require("../../index.js");
 const discord = require("discord.js");
 const fs = require("fs");
 module.exports = {

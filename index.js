@@ -41,9 +41,15 @@ for (category of categories) {
 }
 async function main() {
   try {
-    await rest.put(Routes.applicationCommands("764047181228408873"), {
-      body: [],
-    });
+    await rest.put(
+      Routes.applicationGuildCommands(
+        "764047181228408873",
+        "790827946746314782"
+      ),
+      {
+        body: commands,
+      }
+    );
   } catch (error) {
     console.log(error);
   }

@@ -1,5 +1,5 @@
 let cooldown = false;
-const { client } = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
+const { client } = require("../../index.js");
 const discord = require("discord.js");
 module.exports = {
   command: {

@@ -1,5 +1,5 @@
 const discord = require("discord.js");
-const { client } = require("C:/Users/HP/Desktop/Code/Makhani Parchai/index.js");
+const { client } = require("../../index.js");
 module.exports = {
   command: { name: "guilds", description: "Bot's guild list" },
   /**
