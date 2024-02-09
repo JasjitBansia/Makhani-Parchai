@@ -24,7 +24,8 @@ module.exports = {
         attachment.contentType === "image/png" ||
         attachment.contentType === "image/jpg" ||
         attachment.contentType === "image/jpeg" ||
-        attachment.contentType === "image/webp"
+        attachment.contentType === "image/webp" ||
+        attachment.contentType === "image/gif"
       ) {
         interaction.reply("Changing avatar...");
         client.user
