@@ -42,7 +42,7 @@ module.exports = {
           });
       } else {
         interaction.reply(
-          "Not a supported file format. Supported formats are `.png`, `.jpg`, `.jpeg` and `.webp`"
+          "Not a supported file format. Supported formats are `.png`, `.jpg`, `.jpeg`, `.gif` and `.webp`"
         );
       }
     } else {
