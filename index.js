@@ -41,21 +41,14 @@ for (category of categories) {
 }
 async function main() {
   try {
-    await rest.put(
-      Routes.applicationGuildCommands(
-        "764047181228408873",
-        "790827946746314782"
-      ),
-      {
-        body: commands,
-      }
-    );
+    await rest.put(Routes.applicationCommands("764047181228408873"), {
+      body: commands,
+    });
   } catch (error) {
     console.log(error);
   }
 }
 main();
-
 client.on("interactionCreate", async (interaction) => {
   if (interaction.isCommand()) {
     for (category of categories) {

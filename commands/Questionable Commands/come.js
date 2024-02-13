@@ -1,4 +1,5 @@
 let inProgress = false;
+let stopState = false;
 const discord = require("discord.js");
 module.exports = {
   command: {
@@ -32,8 +33,13 @@ module.exports = {
     );
     if (inProgress === false) {
       inProgress = true;
+      stopState = false;
       interaction.reply(`Pinging...`);
       for (let i = 1; i <= numberOfPings; i++) {
+        if (stopState === true) {
+          inProgress = false;
+          break;
+        }
         let message = await interaction.channel.send({
           content: text,
           components: [],
@@ -52,10 +58,10 @@ module.exports = {
       );
     }
   },
-  async buttonCommand(interaction) {
+  buttonCommand(interaction) {
     if (interaction.customId === "stop" && inProgress !== false) {
-      await interaction.reply("Stopped the summoning");
-      process.exit(1);
+      interaction.reply("Stopped the summoning");
+      stopState = true;
     } else {
       interaction.reply(
         `<@${interaction.user.id}> There is no cumming going on. What are you trying to stop?`
