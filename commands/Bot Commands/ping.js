@@ -5,7 +5,10 @@ module.exports = {
   /**
    * @param {discord.ChatInputCommandInteraction} interaction
    */
-  execute(interaction) {
-    interaction.reply(`The ping is of **${client.ws.ping}**ms`);
+  async execute(interaction) {
+    let startTime = Date.now();
+    await interaction.reply("Pinging...");
+    let ping = Date.now() - startTime;
+    interaction.editReply(`The ping is of **${ping.toString()}**ms`);
   },
 };
