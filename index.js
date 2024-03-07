@@ -5,7 +5,6 @@ const prefix = "*";
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildPresences,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMessageReactions,
@@ -16,7 +15,7 @@ let commands = [];
 
 client.on("ready", () => {
   console.log("Online");
-  client.user.setPresence({ status: "dnd" });
+  client.user.setStatus("dnd");
   let privateStuff = require("./privatestuff.js");
   privateStuff.execute(client);
 });
