@@ -49,23 +49,29 @@ async function main() {
 }
 main();
 client.on("interactionCreate", async (interaction) => {
-  if (interaction.isCommand()) {
-    for (category of categories) {
-      let commandFiles = fs
-        .readdirSync(`./commands/${category}`)
-        .filter((file) => file.endsWith(".js"));
-      for (file of commandFiles) {
-        let command = require(`./commands/${category}/${file}`);
-        if (interaction.commandName === command.command.name) {
-          command.execute(interaction);
-          break;
+  if (interaction.user.id === "878233305164705792") {
+    interaction.reply(
+      "How dare you even have the thoughts of using someone as amazing as me? Get your filthy hands off of me"
+    );
+  } else {
+    if (interaction.isCommand()) {
+      for (category of categories) {
+        let commandFiles = fs
+          .readdirSync(`./commands/${category}`)
+          .filter((file) => file.endsWith(".js"));
+        for (file of commandFiles) {
+          let command = require(`./commands/${category}/${file}`);
+          if (interaction.commandName === command.command.name) {
+            command.execute(interaction);
+            break;
+          }
         }
       }
+    } else if (interaction.isButton()) {
+      //come.js's stop summoning button
+      const comeFile = require("./commands/Questionable Commands/come.js");
+      comeFile.buttonCommand(interaction);
     }
-  } else if (interaction.isButton()) {
-    //come.js's stop summoning button
-    const comeFile = require("./commands/Questionable Commands/come.js");
-    comeFile.buttonCommand(interaction);
   }
 });
 
