@@ -22,7 +22,7 @@ module.exports = {
     let handledMinutes = minutes < 10 ? `0${minutes}` : minutes;
     let handledHours = hours < 10 ? `0${hours}` : hours;
     let embed = new discord.EmbedBuilder()
-      .setTitle("Uptime")
+      .setTitle("Punjab Power Stats")
       .setDescription(
         `**${handledHours}** hours **${handledMinutes}** minutes **${handledSeconds}** seconds`
       )
