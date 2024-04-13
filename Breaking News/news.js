@@ -29,7 +29,7 @@ module.exports = {
               channel.name === "announcements"
           );
         if (channel) {
-          if (date === 13 || date === 1) {
+          if (date === 15 || date === 1) {
             async function send() {
               let totalNews = await db.collection("news").findOne();
               if (guild.usedUpIDs.length !== totalNews.news.length) {
