@@ -1,5 +1,6 @@
 const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 const fs = require("fs");
+const path = require("path");
 const tokens = require("./tokens.json");
 const mongodb = require("mongodb");
 const MongoClient = new mongodb.MongoClient(tokens.mongodb_connection_string);
@@ -38,7 +39,7 @@ let categories = [
 module.exports = { client, categories, MongoClient };
 for (category of categories) {
   let commandFiles = fs
-    .readdirSync(`./commands/${category}`)
+    .readdirSync(path.join(__dirname + `/commands/${category}`))
     .filter((file) => file.endsWith(".js"));
   for (file of commandFiles) {
     let command = require(`./commands/${category}/${file}`);
@@ -64,7 +65,7 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.isCommand()) {
       for (category of categories) {
         let commandFiles = fs
-          .readdirSync(`./commands/${category}`)
+          .readdirSync(path.join(__dirname + `/commands/${category}`))
           .filter((file) => file.endsWith(".js"));
         for (file of commandFiles) {
           let command = require(`./commands/${category}/${file}`);

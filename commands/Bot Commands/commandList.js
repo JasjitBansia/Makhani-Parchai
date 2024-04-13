@@ -1,6 +1,7 @@
 const { categories } = require("../../index.js");
 const discord = require("discord.js");
 const fs = require("fs");
+const path = require("path");
 module.exports = {
   command: {
     name: "commandlist",
@@ -13,7 +14,11 @@ module.exports = {
     let text = "";
     for (category of categories) {
       let commandFiles = fs
-        .readdirSync(`./commands/${category}`)
+        .readdirSync(
+          path.join(
+            __dirname.toString().replace(/Bot Commands/i, "") + `\\${category}`
+          )
+        )
         .filter((file) => file.endsWith(".js"));
       text += `# ${category}:\n`;
       for (file of commandFiles) {
