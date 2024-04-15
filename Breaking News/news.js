@@ -2,12 +2,12 @@ const discord = require("discord.js");
 const Canvas = require("canvas");
 const { MongoClient, client } = require("../index.js");
 const db = MongoClient.db("Breaking-News");
-let date = new Date().getDate();
-setInterval(() => {
-  date = new Date().getDate();
-}, 21600000);
 module.exports = {
   async execute() {
+    let date = new Date().getDate();
+    setInterval(() => {
+      date = new Date().getDate();
+    }, 21600000);
     let newsArray = await db.collection("news").findOne({});
     newsArray = newsArray.news;
     let canvas = Canvas.createCanvas(1920, 1080);
