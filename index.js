@@ -24,7 +24,9 @@ client.on("ready", () => {
   let privateStuff = require("./privatestuff.js");
   privateStuff.execute(client);
   let news = require("./Breaking News/news.js");
-  news.execute();
+  setInterval(() => {
+    news.execute();
+  }, 21600000);
 });
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
 
