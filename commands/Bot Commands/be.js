@@ -17,16 +17,12 @@ module.exports = {
    * @param {discord.ChatInputCommandInteraction} interaction
    */
   async execute(interaction) {
-    if (interaction.options.data[0].value.toString().length <= 32) {
+    let nickname = interaction.options.data[0].value;
+    if (nickname.length <= 32) {
       await interaction.guild.members.cache
         .get(client.user.id.toString())
-        .setNickname(interaction.options.data[0].value);
-      interaction.reply(
-        `Hii I'm ${
-          interaction.guild.members.cache.get(client.user.id.toString())
-            .displayName
-        }`
-      );
+        .setNickname(nickname);
+      interaction.reply(`Hii I'm ${nickname}`);
     } else {
       interaction.reply("Nickname should be less than or of 32 characters.");
     }
