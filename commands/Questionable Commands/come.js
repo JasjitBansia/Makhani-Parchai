@@ -34,7 +34,7 @@ module.exports = {
     if (inProgress === false) {
       inProgress = true;
       stopState = false;
-      interaction.reply(`Pinging...`);
+      await interaction.reply(`Pinging...`);
       for (let i = 1; i <= numberOfPings; i++) {
         if (stopState === true) {
           inProgress = false;
