@@ -2,8 +2,6 @@ const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 const tokens = require("./tokens.json");
-const mongodb = require("mongodb");
-const MongoClient = new mongodb.MongoClient(tokens.mongodb_connection_string);
 const prefix = "*";
 const client = new Client({
   intents: [
@@ -19,15 +17,9 @@ let commands = [];
 
 client.on("ready", () => {
   console.log("Online");
-  MongoClient.connect();
-  console.log("Connected to db");
   client.user.setStatus("dnd");
   let privateStuff = require("./privatestuff.js");
   privateStuff.execute(client);
-  let news = require("./Breaking News/news.js");
-  setInterval(() => {
-    news.execute();
-  }, 21600000);
 });
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
 
@@ -37,9 +29,8 @@ let categories = [
   "Questionable Commands",
   "Fun Commands",
   "Restricted Commands",
-  "Misc. Commands",
 ];
-module.exports = { client, categories, MongoClient };
+module.exports = { client, categories };
 for (category of categories) {
   let commandFiles = fs
     .readdirSync(path.join(__dirname + `/commands/${category}`))
