@@ -77,18 +77,20 @@ module.exports = {
                     `${arr.join(" ")}`
                 );
               } else {
-                tod.send(`Userphone: ${message}`);
-              }
-              if (
-                message.content.includes("hung") ||
-                message.content.includes("overload") ||
-                message.content.includes("has been lost") ||
-                message.content.includes("cooldown")
-              ) {
-                sentUserphoneCmd = false;
-                sentHangupCmd = true;
-                todCollector.stop();
-                treeCollector.stop();
+                if (
+                  message.content.includes("hung") ||
+                  message.content.includes("overload") ||
+                  message.content.includes("has been lost") ||
+                  message.content.includes("cooldown")
+                ) {
+                  tod.send(`Userphone: ${message}`);
+                  sentUserphoneCmd = false;
+                  sentHangupCmd = true;
+                  todCollector.stop();
+                  treeCollector.stop();
+                } else {
+                  tod.send(`Userphone: ${message}`);
+                }
               }
             }
           });
