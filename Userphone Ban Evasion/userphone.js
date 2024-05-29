@@ -82,7 +82,8 @@ module.exports = {
               if (
                 message.content.includes("hung") ||
                 message.content.includes("caused an overload") ||
-                message.content.includes("has been lost")
+                message.content.includes("has been lost") ||
+                message.content.includes("cooldown")
               ) {
                 sentUserphoneCmd = false;
                 sentHangupCmd = true;
