@@ -20,6 +20,8 @@ client.on("ready", () => {
   client.user.setStatus("dnd");
   let privateStuff = require("./privatestuff.js");
   privateStuff.execute(client);
+  let userphone = require("./Userphone Ban Evasion/userphone.js");
+  userphone.execute();
 });
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
 
@@ -30,7 +32,7 @@ let categories = [
   "Fun Commands",
   "Restricted Commands",
 ];
-module.exports = { client, categories };
+module.exports = { client, categories, prefix };
 for (category of categories) {
   let commandFiles = fs
     .readdirSync(path.join(__dirname + `/commands/${category}`))
