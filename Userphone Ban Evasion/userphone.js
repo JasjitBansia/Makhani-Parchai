@@ -1,4 +1,5 @@
 const { client, prefix } = require("../index.js");
+const emojiRegex = require("emoji-regex");
 const tokens = require("../tokens.json");
 let sentUserphoneCmd = false;
 let sentHangupCmd = false;
@@ -67,7 +68,7 @@ module.exports = {
           });
           treeCollector.on("collect", (message) => {
             if (message.author.id === "247283454440374274") {
-              if (message.content.includes("#0000")) {
+              if (emojiRegex().test(message.content.split(" ")[0]) === false) {
                 const arr = message.content.split(" ");
                 arr.shift();
                 arr.shift();

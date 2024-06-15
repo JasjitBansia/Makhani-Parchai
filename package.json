@@ -12,6 +12,7 @@
   "dependencies": {
     "canvas": "^2.11.2",
     "discord.js": "^14.9.0",
+    "emoji-regex": "^10.3.0",
     "mongodb": "^6.5.0",
     "nodemon": "^2.0.20"
   }
