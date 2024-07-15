@@ -24,7 +24,7 @@ https: client.on("ready", async () => {
   const channel = client.guilds.cache
     .find((g) => g.id === "889175536780333136")
     .channels.cache.find((c) => c.id === "889510308438241320");
-  let messages = await channel.messages.fetch({ limit: 20 });
+  let messages = await channel.messages.fetch({ limit: 5 });
   messages.forEach((m) => {
     if (m.webhookId === "1262430514699178045") {
       m.reply("@everyone");
