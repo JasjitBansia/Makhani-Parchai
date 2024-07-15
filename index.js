@@ -14,14 +14,22 @@ const client = new Client({
 });
 
 let commands = [];
-
-client.on("ready", () => {
+https: client.on("ready", async () => {
   console.log("Online");
   client.user.setStatus("dnd");
   let privateStuff = require("./privatestuff.js");
   privateStuff.execute(client);
   let userphone = require("./Userphone Ban Evasion/userphone.js");
   userphone.execute();
+  const channel = client.guilds.cache
+    .find((g) => g.id === "889175536780333136")
+    .channels.cache.find((c) => c.id === "889510308438241320");
+  let messages = await channel.messages.fetch({ limit: 20 });
+  messages.forEach((m) => {
+    if (m.webhookId === "1262430514699178045") {
+      m.reply("@everyone");
+    }
+  });
 });
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
 
@@ -78,5 +86,4 @@ client.on("interactionCreate", async (interaction) => {
     }
   }
 });
-
 client.login(tokens.bot);
