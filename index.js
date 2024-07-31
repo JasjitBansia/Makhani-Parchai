@@ -1,4 +1,14 @@
-const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
+const {
+  Client,
+  GatewayIntentBits,
+  REST,
+  Routes,
+  WebhookClient,
+  EmbedBuilder,
+} = require("discord.js");
+const express = require("express");
+const app = express();
+app.use(express.json());
 const fs = require("fs");
 const path = require("path");
 const tokens = require("./tokens.json");
@@ -19,17 +29,6 @@ https: client.on("ready", async () => {
   client.user.setStatus("dnd");
   let privateStuff = require("./privatestuff.js");
   privateStuff.execute(client);
-  let userphone = require("./Userphone Ban Evasion/userphone.js");
-  userphone.execute();
-  const channel = client.guilds.cache
-    .find((g) => g.id === "889175536780333136")
-    .channels.cache.find((c) => c.id === "889510308438241320");
-  let messages = await channel.messages.fetch({ limit: 5 });
-  messages.forEach((m) => {
-    if (m.webhookId === "1262430514699178045") {
-      m.reply("@everyone");
-    }
-  });
 });
 const rest = new REST({ version: "10" }).setToken(tokens.bot);
 
@@ -85,5 +84,30 @@ client.on("interactionCreate", async (interaction) => {
       comeFile.buttonCommand(interaction);
     }
   }
+});
+
+const webhookClient = new WebhookClient({
+  url: tokens.webhook_url,
+});
+app.post("/github-webhook", (req, res) => {
+  let data = req.body;
+  const embed = new EmbedBuilder()
+    .setTitle("Makhani Parchai-New Commit")
+    .setColor("Green")
+    .setThumbnail(client.user.displayAvatarURL())
+    .setDescription(
+      data.head_commit.message + " -" + data.head_commit.committer.username
+    );
+
+  webhookClient.send({
+    content: "Commit",
+    username: "Makhani-Parchai",
+    avatarURL: client.user.displayAvatarURL(),
+    embeds: [embed],
+  });
+  res.send({});
+});
+app.listen(5000, () => {
+  console.log("Express server listening on port 5000");
 });
 client.login(tokens.bot);

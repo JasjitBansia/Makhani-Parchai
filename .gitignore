@@ -2,5 +2,3 @@ tokens.json
 package-lock.json
 privatestuff.js
 /node_modules
-/Service
-/daemon
