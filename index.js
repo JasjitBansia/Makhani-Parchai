@@ -6,6 +6,12 @@ const {
   WebhookClient,
   EmbedBuilder,
 } = require("discord.js");
+const { exec } = require("child_process");
+try {
+  exec("lt --port 5000 --subdomain jasjitbansia-github");
+} catch (e) {
+  console.log("Error");
+}
 const express = require("express");
 const app = express();
 app.use(express.json());
@@ -100,7 +106,7 @@ app.post("/github-webhook", (req, res) => {
     );
 
   webhookClient.send({
-    content: "Commit",
+    content: "@everyone",
     username: "Makhani-Parchai",
     avatarURL: client.user.displayAvatarURL(),
     embeds: [embed],
