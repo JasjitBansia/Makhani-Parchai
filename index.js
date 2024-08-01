@@ -1,20 +1,4 @@
-const {
-  Client,
-  GatewayIntentBits,
-  REST,
-  Routes,
-  WebhookClient,
-  EmbedBuilder,
-} = require("discord.js");
-const { exec } = require("child_process");
-try {
-  exec("lt --port 5000 --subdomain jasjitbansia-github");
-} catch (e) {
-  console.log("Error");
-}
-const express = require("express");
-const app = express();
-app.use(express.json());
+const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 const tokens = require("./tokens.json");
@@ -28,9 +12,8 @@ const client = new Client({
     GatewayIntentBits.GuildMembers,
   ],
 });
-
 let commands = [];
-https: client.on("ready", async () => {
+client.on("ready", async () => {
   console.log("Online");
   client.user.setStatus("dnd");
   let privateStuff = require("./privatestuff.js");
@@ -90,30 +73,5 @@ client.on("interactionCreate", async (interaction) => {
       comeFile.buttonCommand(interaction);
     }
   }
-});
-
-const webhookClient = new WebhookClient({
-  url: tokens.webhook_url,
-});
-app.post("/github-webhook", (req, res) => {
-  let data = req.body;
-  const embed = new EmbedBuilder()
-    .setTitle("Makhani Parchai-New Commit")
-    .setColor("Green")
-    .setThumbnail(client.user.displayAvatarURL())
-    .setDescription(
-      data.head_commit.message + " -" + data.head_commit.committer.username
-    );
-
-  webhookClient.send({
-    content: "@everyone",
-    username: "Makhani-Parchai",
-    avatarURL: client.user.displayAvatarURL(),
-    embeds: [embed],
-  });
-  res.send({});
-});
-app.listen(5000, () => {
-  console.log("Express server listening on port 5000");
 });
 client.login(tokens.bot);
