@@ -14,11 +14,7 @@ module.exports = {
     let text = "";
     for (category of categories) {
       let commandFiles = fs
-        .readdirSync(
-          path.join(
-            __dirname.toString().replace(/Bot Commands/i, "") + `\\${category}`
-          )
-        )
+        .readdirSync(`./commands/${category}`)
         .filter((file) => file.endsWith(".js"));
       text += `# ${category}:\n`;
       for (file of commandFiles) {
