@@ -25,7 +25,7 @@ setInterval(() => {
   }
 }, 1000);
 module.exports = {
-  command: { name: "stats", description: "Displays bot stats" },
+  command: { name: "stats", description: "Displays bot and hardware info" },
   /**
    *
    * @param {discord.ChatInputCommandInteraction} interaction
