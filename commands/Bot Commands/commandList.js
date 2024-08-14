@@ -1,7 +1,6 @@
 const { categories } = require("../../index.js");
 const discord = require("discord.js");
 const fs = require("fs");
-const path = require("path");
 module.exports = {
   command: {
     name: "commandlist",
