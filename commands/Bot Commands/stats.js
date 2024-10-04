@@ -57,8 +57,8 @@ module.exports = {
         )}%\n**CPU temperature**: ${cpuTemp.main.toFixed(
           1
         )}°C\n**Total RAM**: ${(mem.total / 1000000000).toFixed(
-          1
-        )}GB\n**RAM in use**: ${(mem.used / 1000000000).toFixed(1)}GB (${(
+          2
+        )}GB\n**RAM in use**: ${(mem.used / 1000000000).toFixed(2)}GB (${(
           (mem.used / mem.total) *
           100
         ).toFixed(0)}%)
