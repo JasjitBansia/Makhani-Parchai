@@ -17,7 +17,7 @@ module.exports = {
         }/${userObj.pushupGoal} (${(
           (userObj.pushupsDone / userObj.pushupGoal) *
           100
-        ).toFixed(0)}%)\n\n**Time left**: ${(
+        ).toFixed(1)}%)\n\n**Time left**: ${(
           (new Date("1 January 2025").getTime() - Date.now()) /
           86400000
         ).toFixed(0)} days left
