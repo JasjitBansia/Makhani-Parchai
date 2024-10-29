@@ -10,17 +10,17 @@ module.exports = {
     let userObj = await db.findOne({ userID: userID });
     let embed = new discord.EmbedBuilder()
       .setDescription(
-        `**User**: <@${userObj.userID}>\n
-      **Pushup goal**: ${userObj.pushupGoal}\n
-      **Pushups done** : ${userObj.pushupsDone}\n
-      **Progress**: ${userObj.pushupsDone}/${userObj.pushupGoal} (${(
+        `**User**: <@${userObj.userID}>\n\n**Pushup goal**: ${
+          userObj.pushupGoal
+        }\n\n**Pushups done**: ${userObj.pushupsDone}\n\n**Progress**: ${
+          userObj.pushupsDone
+        }/${userObj.pushupGoal} (${(
           (userObj.pushupsDone / userObj.pushupGoal) *
           100
-        ).toFixed(0)}%)\n
-      **Time left**: ${(
-        (new Date("1 January 2025").getTime() - Date.now()) /
-        86400000
-      ).toFixed(0)} days left
+        ).toFixed(0)}%)\n\n**Time left**: ${(
+          (new Date("1 January 2025").getTime() - Date.now()) /
+          86400000
+        ).toFixed(0)} days left
     `
       )
       .setColor("Green");
