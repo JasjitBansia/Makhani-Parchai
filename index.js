@@ -20,6 +20,11 @@ client.on("ready", async () => {
   await mongoClient.connect();
   console.log("Connected to db");
   client.user.setStatus("dnd");
+  setTimeout(() => {
+    if (client.user.presence.status !== "dnd") {
+      client.user.setStatus("dnd");
+    }
+  }, 3600000);
   let privateStuff = require("./privatestuff.js");
   privateStuff.execute(client);
 });
