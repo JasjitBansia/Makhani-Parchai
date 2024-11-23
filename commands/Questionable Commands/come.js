@@ -37,7 +37,6 @@ module.exports = {
       interaction.reply(`Pinging...`);
       for (let i = 1; i <= numberOfPings; i++) {
         if (stopState === true) {
-          inProgress = false;
           break;
         }
         let message = await interaction.channel.send({
@@ -62,6 +61,7 @@ module.exports = {
     if (interaction.customId === "stop" && inProgress !== false) {
       interaction.reply("Stopped the summoning");
       stopState = true;
+      inProgress = false;
     } else {
       interaction.reply(
         `<@${interaction.user.id}> There is no cumming going on. What are you trying to stop?`
