@@ -20,7 +20,7 @@ client.on("ready", async () => {
   await mongoClient.connect();
   console.log("Connected to db");
   client.user.setStatus("dnd");
-  setTimeout(() => {
+  setInterval(() => {
     if (client.user.presence.status !== "dnd") {
       client.user.setStatus("dnd");
     }
