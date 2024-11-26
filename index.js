@@ -19,12 +19,6 @@ client.on("ready", async () => {
   console.log("Online");
   await mongoClient.connect();
   console.log("Connected to db");
-  client.user.setStatus("dnd");
-  setInterval(() => {
-    if (client.user.presence.status !== "dnd") {
-      client.user.setStatus("dnd");
-    }
-  }, 3600000);
   let privateStuff = require("./privatestuff.js");
   privateStuff.execute(client);
 });
