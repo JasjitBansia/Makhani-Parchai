@@ -30,7 +30,6 @@ let categories = [
   "Questionable Commands",
   "Fun Commands",
   "Restricted Commands",
-  "Pushup Commands",
 ];
 module.exports = { client, categories, prefix, mongoClient };
 for (category of categories) {
