@@ -50,8 +50,8 @@ module.exports = {
           "discord.js"
         ].substring(1)}\n### **Hardware Info**\n**CPU frequency**: ${
           cpuFreq.avg
-        }Ghz\n**CPU cores**: ${cpu.physicalCores}\n**CPU architecture**: ${
-          cpu.vendor
+        }Ghz\n**CPU cores**: ${
+          cpu.physicalCores
         }\n**CPU load**: ${cpuLoad.currentLoad.toFixed(
           1
         )}%\n**CPU temperature**: ${cpuTemp.main.toFixed(
