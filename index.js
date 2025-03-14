@@ -62,7 +62,6 @@ client.on("interactionCreate", async (interaction) => {
       }
     }
   } else if (interaction.isButton()) {
-    //come.js's stop summoning button
     const comeFile = require("./commands/Questionable Commands/come.js");
     comeFile.buttonCommand(interaction);
   }
