@@ -25,7 +25,9 @@ const webhookClient = new WebhookClient({
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-
+app.get("/status", (req, res) => {
+  res.status(200).send("Server is running");
+});
 app.post("/github-webhook", async (req, res) => {
   let commitMessage;
   let important = false;
