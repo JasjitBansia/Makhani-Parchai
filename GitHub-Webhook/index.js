@@ -1,5 +1,6 @@
 const express = require("express");
 const tokens = require("../tokens.json");
+const { exec } = require("child_process");
 const port = 4500;
 const {
   Client,
@@ -7,6 +8,23 @@ const {
   EmbedBuilder,
   GatewayIntentBits,
 } = require("discord.js");
+function localTunnel() {
+  try {
+    exec(
+      `lt --port ${port} --subdomain jasjitbansia-github`,
+      (error, stdout) => {
+        if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
+        }
+        console.log(`stdout: ${stdout}`);
+      }
+    );
+  } catch (e) {
+    console.lo;
+  }
+}
+localTunnel();
 const app = express();
 app.use(express.json());
 const client = new Client({
@@ -25,9 +43,7 @@ const webhookClient = new WebhookClient({
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-app.get("/status", (req, res) => {
-  res.status(200).send("Server is running");
-});
+
 app.post("/github-webhook", async (req, res) => {
   let commitMessage;
   let important = false;
