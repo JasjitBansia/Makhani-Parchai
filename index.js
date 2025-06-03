@@ -26,6 +26,7 @@ let categories = [
   "Questionable Commands",
   "Fun Commands",
   "Restricted Commands",
+  "Moderation Commands",
 ];
 module.exports = { client, categories, prefix };
 for (category of categories) {

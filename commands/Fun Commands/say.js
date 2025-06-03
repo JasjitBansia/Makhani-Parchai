@@ -17,7 +17,10 @@ module.exports = {
    * @param {discord.ChatInputCommandInteraction} interaction
    */
   execute(interaction) {
-    interaction.reply({ content: "Message sent", ephemeral: true });
+    interaction.reply({
+      content: "Message sent",
+      flags: discord.MessageFlags.Ephemeral,
+    });
     interaction.channel.send(interaction.options.data[0].value);
   },
 };
