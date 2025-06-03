@@ -67,4 +67,21 @@ client.on("interactionCreate", async (interaction) => {
     comeFile.buttonCommand(interaction);
   }
 });
+client.on("messageCreate", (message) => {
+  if (message.author.bot) return;
+  if (message.content.startsWith(prefix)) {
+    let tokens = message.content.trim().split(prefix);
+    let command =
+      tokens[1].split(" ").length > 1 ? tokens[1].split(" ")[0] : tokens[1];
+    let files = fs
+      .readdirSync(path.join(__dirname + "/Message Commands"))
+      .filter((file) => file.endsWith(".js"));
+    files.forEach((file) => {
+      if (command.toLowerCase() === file.split(".")[0]) {
+        let commandFile = require(`./Message Commands/${file}`);
+        commandFile.execute(message);
+      }
+    });
+  }
+});
 client.login(tokens.bot);

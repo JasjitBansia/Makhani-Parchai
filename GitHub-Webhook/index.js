@@ -16,6 +16,7 @@ const client = new Client({
     GatewayIntentBits.Guilds,
   ],
 });
+
 client.on("ready", () => {
   console.log("Bot is ready");
 });
@@ -52,7 +53,7 @@ app.post("/github-webhook", async (req, res) => {
     avatarURL: user.displayAvatarURL(),
     embeds: [embed],
   });
-  res.status(200);
+  res.send("Sent").status(200);
 });
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
