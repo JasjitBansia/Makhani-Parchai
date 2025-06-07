@@ -1,6 +1,11 @@
 const token = require("../tokens.json");
 const discord = require("discord.js");
+const { command } = require("./decbi");
 module.exports = {
+  command: {
+    name: "define",
+    description: "Just another way to run /define",
+  },
   /**
    * @param {discord.Message} message
    */

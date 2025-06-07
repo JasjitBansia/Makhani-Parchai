@@ -2,16 +2,23 @@ const discord = require("discord.js");
 const systeminformation = require("systeminformation");
 const package = require("../../package.json");
 const fs = require("fs");
+const path = require("path");
 const { categories, client } = require("../../index.js");
-let numberOfCommands = 0;
+let slashCommands = 0;
+let messageCommands = 0;
 for (category of categories) {
   let commandFiles = fs
     .readdirSync(`./commands/${category}`)
     .filter((file) => file.endsWith(".js"));
   for (file of commandFiles) {
-    numberOfCommands++;
+    slashCommands++;
   }
 }
+fs.readdirSync(path.join(__dirname, "..", "..", "/Message Commands"))
+  .filter((file) => file.endsWith(".js"))
+  .forEach(() => {
+    messageCommands++;
+  });
 let [seconds, minutes, hours] = [0, 0, 0];
 setInterval(() => {
   seconds++;
@@ -44,7 +51,7 @@ module.exports = {
     let embed = new discord.EmbedBuilder()
       .setTitle("Statistics")
       .setDescription(
-        `### **Bot Info**\n**Uptime**: ${handledHours}:${handledMinutes}:${handledSeconds}\n**Total commands**: ${numberOfCommands}\n**Registered on**: ${client.user.createdAt.toLocaleDateString()}\n**Guild count**: ${
+        `### **Bot Info**\n**Uptime**: ${handledHours}:${handledMinutes}:${handledSeconds}\n**Slash commands**: ${slashCommands}\n**Message commands**: ${messageCommands}\n**Registered on**: ${client.user.createdAt.toLocaleDateString()}\n**Guild count**: ${
           client.guilds.cache.size
         }\n**Discord.js version**: ${package.dependencies[
           "discord.js"

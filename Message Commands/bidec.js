@@ -1,4 +1,8 @@
 module.exports = {
+  command: {
+    name: "bidec",
+    description: "Convert binary to decimal",
+  },
   /**
    * @param {discord.Message} message
    */

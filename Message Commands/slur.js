@@ -1,5 +1,9 @@
 const discord = require("discord.js");
 module.exports = {
+  command: {
+    name: "slur",
+    description: "Hard M",
+  },
   /**
    * @param {discord.Message} message
    */

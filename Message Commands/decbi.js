@@ -1,4 +1,8 @@
 module.exports = {
+  command: {
+    name: "decbi",
+    description: "Convert decimal to binary",
+  },
   /**
    * @param {discord.Message} message
    */

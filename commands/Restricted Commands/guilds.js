@@ -13,9 +13,15 @@ module.exports = {
         index++;
         text += `**${index}.** ${guild.name}\n`;
       });
-      interaction.reply(text);
+      interaction.reply({
+        content: text,
+        flags: discord.MessageFlags.Ephemeral,
+      });
     } else {
-      interaction.reply({ content: "Restricted command", ephemeral: true });
+      interaction.reply({
+        content: "Restricted command",
+        flags: discord.MessageFlags.Ephemeral,
+      });
     }
   },
 };

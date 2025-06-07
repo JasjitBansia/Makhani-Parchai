@@ -13,6 +13,7 @@ const client = new Client({
   ],
 });
 let commands = [];
+
 client.on("ready", async () => {
   console.log("Online");
   let privateStuff = require("./privatestuff.js");
