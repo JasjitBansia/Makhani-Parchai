@@ -50,22 +50,26 @@ async function main() {
 }
 main();
 client.on("interactionCreate", async (interaction) => {
-  if (interaction.isCommand()) {
-    for (category of categories) {
-      let commandFiles = fs
-        .readdirSync(path.join(__dirname + `/commands/${category}`))
-        .filter((file) => file.endsWith(".js"));
-      for (file of commandFiles) {
-        let command = require(`./commands/${category}/${file}`);
-        if (interaction.commandName === command.command.name) {
-          command.execute(interaction);
-          break;
+  if (interaction.context === 0) {
+    if (interaction.isCommand()) {
+      for (category of categories) {
+        let commandFiles = fs
+          .readdirSync(path.join(__dirname + `/commands/${category}`))
+          .filter((file) => file.endsWith(".js"));
+        for (file of commandFiles) {
+          let command = require(`./commands/${category}/${file}`);
+          if (interaction.commandName === command.command.name) {
+            command.execute(interaction);
+            break;
+          }
         }
       }
+    } else if (interaction.isButton()) {
+      const comeFile = require("./commands/Questionable Commands/come.js");
+      comeFile.buttonCommand(interaction);
     }
-  } else if (interaction.isButton()) {
-    const comeFile = require("./commands/Questionable Commands/come.js");
-    comeFile.buttonCommand(interaction);
+  } else {
+    interaction.reply("Cannot execute commands in dm");
   }
 });
 client.on("messageCreate", (message) => {
